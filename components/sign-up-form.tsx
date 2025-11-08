@@ -106,6 +106,7 @@ export function SignUpForm({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
