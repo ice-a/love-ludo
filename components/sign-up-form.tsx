@@ -18,6 +18,7 @@ export function SignUpForm({
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRandom, setIsRandom] = useState(false);
   const router = useRouter();
 
   const generateRandomAccount = () => {
@@ -28,6 +29,7 @@ export function SignUpForm({
       Math.random().toString(36).substring(2, 6).toUpperCase();
     setEmail(randomEmail);
     setPassword(randomPass);
+    setIsRandom(true);
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -70,7 +72,11 @@ export function SignUpForm({
           console.warn("seed-default-tasks failed", await res.text());
         }
       } catch {}
-      router.replace("/lobby");
+      if (isRandom) {
+        router.replace("/lobby");
+      } else {
+        router.replace("/login");
+      }
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
